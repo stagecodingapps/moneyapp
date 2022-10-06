@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:get/get.dart';
 import 'package:money_app/app/config/colors.dart';
 import 'package:money_app/app/config/text_styles.dart';
@@ -9,9 +8,9 @@ import 'package:money_app/app/modules/transaction/views/enter_amount_view.dart';
 import 'package:money_app/app/modules/transaction/views/widgets/custom_icon_button.dart';
 import 'package:money_app/app/modules/transaction/views/widgets/tile_button.dart';
 import 'package:money_app/app/modules/transaction/views/widgets/total_balance.dart';
-
 import 'package:money_app/app/routes/app_pages.dart';
 import 'package:money_app/app/util/date_time.dart';
+
 import '../controllers/transaction_controller.dart';
 
 class TransactionsView extends GetView<TransactionController> {
@@ -42,6 +41,7 @@ class TransactionsView extends GetView<TransactionController> {
                   List<Transaction> transactions =
                       controller.transactions.value;
                   return ListView.builder(
+                    padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     itemCount: transactions.length,
                     itemBuilder: (context, index) {

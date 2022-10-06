@@ -16,44 +16,46 @@ class ToWhomView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.pink,
-      body: Stack(
-        children: [
-          const Align(
-            alignment: Alignment.topRight,
-            child: CustomCloseButton(),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 12),
-                child: Text(
-                  'MoneyApp',
-                  style: AppText.semibold16White,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            const Align(
+              alignment: Alignment.topRight,
+              child: CustomCloseButton(),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 12),
+                  child: Text(
+                    'MoneyApp',
+                    style: AppText.semibold16White,
+                  ),
                 ),
-              ),
-              const Text(
-                'To whom?',
-                style: AppText.semibold25White,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 45),
-                child: UnderlineInputField(
-                  onChanged: (value) =>
-                      controller.setTransactionName(value ?? ''),
+                const Text(
+                  'To whom?',
+                  style: AppText.semibold25White,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 34),
-                child: WhiteButton(
-                  title: 'Pay',
-                  onPressed: () => controller.addTransaction(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 45),
+                  child: UnderlineInputField(
+                    onChanged: (value) =>
+                        controller.setTransactionName(value ?? ''),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 34),
+                  child: WhiteButton(
+                    title: 'Pay',
+                    onPressed: () => controller.addTransaction(),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
