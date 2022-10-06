@@ -26,7 +26,7 @@ class LoanView extends GetView<LoanController> {
                   SizedBox(
                     width: 45,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () => Get.back(),
                       style: const ButtonStyle(
                           padding: MaterialStatePropertyAll(EdgeInsets.zero),
                           overlayColor:
@@ -66,33 +66,36 @@ class LoanView extends GetView<LoanController> {
                 style: AppText.regular14DarkGrey,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: SizedBox(
-                height: 50,
-                child: TextButton(
-                  onPressed: () {},
-                  style: const ButtonStyle(
-                    padding: MaterialStatePropertyAll(
-                      EdgeInsets.only(left: 20, right: 20),
+            Obx(
+              () => Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: SizedBox(
+                  height: 50,
+                  child: TextButton(
+                    onPressed: () => controller.toggleTermAndService(null),
+                    style: const ButtonStyle(
+                      padding: MaterialStatePropertyAll(
+                        EdgeInsets.only(left: 20, right: 20),
+                      ),
+                      backgroundColor: MaterialStatePropertyAll(Colors.white),
+                      overlayColor: MaterialStatePropertyAll(AppColors.pink20),
                     ),
-                    backgroundColor: MaterialStatePropertyAll(Colors.white),
-                    overlayColor: MaterialStatePropertyAll(AppColors.pink20),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Accept Terms & Conditions',
-                        style: AppText.medium14Black,
-                      ),
-                      Switch(
-                        value: false,
-                        onChanged: (val) {},
-                        activeColor: AppColors.pink,
-                      ),
-                    ],
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Accept Terms & Conditions',
+                          style: AppText.medium14Black,
+                        ),
+                        Switch(
+                          value: controller.termsAndService.value,
+                          onChanged: (value) =>
+                              controller.toggleTermAndService(value),
+                          activeColor: AppColors.pink,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -106,11 +109,11 @@ class LoanView extends GetView<LoanController> {
             ),
             CustomInputField(
               title: 'Monthly Salary',
-              onChanged: (value) {},
+              onChanged: (value) => controller.setSalary(value ?? ''),
             ),
             CustomInputField(
               title: 'Monthly Expenses',
-              onChanged: (value) {},
+              onChanged: (value) => controller.setExpenses(value ?? ''),
             ),
             const Padding(
               padding: EdgeInsets.only(left: 20, top: 15, bottom: 5),
@@ -121,11 +124,12 @@ class LoanView extends GetView<LoanController> {
             ),
             CustomInputField(
               title: 'Amount',
-              onChanged: (value) {},
+              onChanged: (value) => controller.setLoanAmount(value ?? ''),
             ),
             CustomInputField(
               title: 'Term',
-              onChanged: (value) {},
+              onChanged: (value) => controller.setTerm(value ?? ''),
+              isTerm: true,
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 20, top: 40),
@@ -136,7 +140,7 @@ class LoanView extends GetView<LoanController> {
                     height: 60,
                     width: 200,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () => controller.applyForLoan(),
                       style: ButtonStyle(
                         backgroundColor:
                             const MaterialStatePropertyAll(AppColors.pink),

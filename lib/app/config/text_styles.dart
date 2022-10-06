@@ -32,6 +32,17 @@ class AppText {
     color: AppColors.white,
   );
 
+  static const semiBold20White = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+  static const semiBold28White = TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+
   static const medium12Black = TextStyle(
     fontFamily: fontFamily,
     fontSize: 12,
@@ -45,6 +56,13 @@ class AppText {
     fontSize: 14,
     fontWeight: FontWeight.w600,
     color: AppColors.darkGrey,
+  );
+
+  static const semibold14Red = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: Colors.red,
   );
 
   static const medium16DarkGrey = TextStyle(

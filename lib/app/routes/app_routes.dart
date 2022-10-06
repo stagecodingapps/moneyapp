@@ -7,10 +7,12 @@ abstract class Routes {
   Routes._();
   static const TRANSACTIONS = _Paths.TRANSACTIONS;
   static const LOAN = _Paths.LOAN;
+  static const WELCOME = _Paths.WELCOME;
 }
 
 abstract class _Paths {
   _Paths._();
   static const TRANSACTIONS = '/transactions';
   static const LOAN = '/loan';
+  static const WELCOME = '/welcome';
 }

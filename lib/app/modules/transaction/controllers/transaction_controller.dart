@@ -38,7 +38,6 @@ class TransactionController extends GetxController {
 
   void splitTheBill() {
     var amount = selectedTransaction.value.amount! / 2;
-
     transactions
         .firstWhere(
             (transaction) => transaction.id! == selectedTransaction.value.id!)
@@ -59,18 +58,21 @@ class TransactionController extends GetxController {
 
   void selectTransaction(Transaction transaction) {
     selectedTransaction.value = transaction;
-    Get.to(() => TransactionDetailsView());
+    Get.to(
+      () => TransactionDetailsView(),
+      transition: Transition.leftToRight,
+    );
   }
 
-  void addTransaction() {
+  void addTransaction({String? title, double? amount}) {
     if (!isTopup.value) {
       transactions.add(
         Transaction(
-          name: transactionName,
-          amount: paymentAmount.value,
+          name: title ?? transactionName,
+          amount: amount ?? paymentAmount.value,
           createdAt: DateTime.now(),
           id: getRandomString(30),
-          type: 'Payment',
+          type: title ?? 'Payment',
         ),
       );
       balance.value -= paymentAmount.value;
@@ -91,6 +93,7 @@ class TransactionController extends GetxController {
     balance.value += paymentAmount.value;
     paymentAmountString = '0';
     paymentAmount.value = 0;
+    isTopup.value = false;
     Get.back();
   }
 
@@ -100,10 +103,16 @@ class TransactionController extends GetxController {
     if (digit == '.' && paymentAmountString.contains(digit)) {
       return;
     }
-    // if (paymentAmountString.length > 3 &&
-    //     paymentAmountString.substring(paymentAmountString.length - 2) == '.') {
-    //   return;
-    // }
+    if (paymentAmountString.length > 3 &&
+        !paymentAmountString
+            .substring(paymentAmountString.length - 2)
+            .contains('.') &&
+        paymentAmountString.contains('.')) {
+      return;
+    }
+    if (paymentAmountString.length > 10) {
+      return;
+    }
     paymentAmountString = '$paymentAmountString$digit';
     paymentAmount.value = double.parse(paymentAmountString);
     log(paymentAmountString);
@@ -126,7 +135,7 @@ class TransactionController extends GetxController {
     paymentAmountString =
         paymentAmountString.substring(0, paymentAmountString.length - 1);
 
-    paymentAmount.value = double.parse(paymentAmountString);
+    paymentAmount.value = double.tryParse(paymentAmountString) ?? 0;
     log(paymentAmountString);
     log(paymentAmount.value.toString());
   }
@@ -147,14 +156,14 @@ class TransactionController extends GetxController {
         name: 'transaction1',
         amount: 120.2,
         createdAt: DateTime(2022, 10, 4),
-        id: 'abcasd',
+        id: 'abcasdaasd',
         type: 'Payment',
       ),
       Transaction(
         name: 'transaction2',
         amount: 120.2,
-        createdAt: DateTime.now(),
-        id: 'abasdsac',
+        createdAt: DateTime(2022, 10, 5),
+        id: 'abcaasdasd',
         type: 'Payment',
       ),
       Transaction(

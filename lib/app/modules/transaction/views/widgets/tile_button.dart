@@ -59,10 +59,10 @@ class TileButton extends StatelessWidget {
                 ? RichText(
                     text: TextSpan(children: [
                     TextSpan(
-                      text: transaction.type == 'Topup'
+                      text: transaction.type != 'Payment'
                           ? '+${transaction.amount!.floor()}'
                           : '${transaction.amount!.floor()}',
-                      style: transaction.type == 'Topup'
+                      style: transaction.type != 'Payment'
                           ? AppText.light22Pink
                           : AppText.light22Black,
                     ),
@@ -70,7 +70,7 @@ class TileButton extends StatelessWidget {
                       text: transaction.amount!.toStringAsFixed(2).substring(
                           transaction.amount!.toStringAsFixed(2).length - 3,
                           transaction.amount!.toStringAsFixed(2).length),
-                      style: transaction.type == 'Topup'
+                      style: transaction.type != 'Payment'
                           ? AppText.light16Pink
                           : AppText.light16Black,
                     )

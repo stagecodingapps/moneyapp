@@ -5,10 +5,12 @@ import 'package:money_app/app/config/text_styles.dart';
 class CustomInputField extends StatelessWidget {
   final String title;
   final Function(String?) onChanged;
+  final bool isTerm;
   const CustomInputField({
     Key? key,
     required this.title,
     required this.onChanged,
+    this.isTerm = false,
   }) : super(key: key);
 
   @override
@@ -26,15 +28,19 @@ class CustomInputField extends StatelessWidget {
           ),
           Row(
             children: [
-              const Text(
-                '£',
-                style: AppText.medium16DarkGrey,
+              Visibility(
+                visible: !isTerm,
+                child: const Text(
+                  '£',
+                  style: AppText.medium16DarkGrey,
+                ),
               ),
               Expanded(
                 child: SizedBox(
                   height: 20,
                   child: TextField(
                     onChanged: onChanged,
+                    keyboardType: TextInputType.number,
                     style: AppText.medium16DarkGrey,
                     cursorColor: AppColors.darkGrey,
                     decoration: const InputDecoration(

@@ -69,7 +69,8 @@ class EnterAmountView extends StatelessWidget {
                   onPressed: () {
                     controller.isTopup.value
                         ? controller.addTransaction()
-                        : Get.off(() => ToWhomView());
+                        : Get.off(() => ToWhomView(),
+                            transition: Transition.leftToRight);
                   },
                 ),
               ),

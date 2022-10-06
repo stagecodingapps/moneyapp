@@ -8,7 +8,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Montserrat'),
       title: "Application",
-      initialRoute: AppPages.INITIAL, //Routes.LOAN, //
+      initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),
   );

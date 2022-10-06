@@ -9,17 +9,17 @@ import 'package:money_app/app/modules/transaction/views/enter_amount_view.dart';
 import 'package:money_app/app/modules/transaction/views/widgets/custom_icon_button.dart';
 import 'package:money_app/app/modules/transaction/views/widgets/tile_button.dart';
 import 'package:money_app/app/modules/transaction/views/widgets/total_balance.dart';
-import 'package:intl/intl.dart';
-import '../controllers/transaction_controller.dart';
 
-final dateFormat = DateFormat('yyyy-MM-dd');
-final dateFormat2 = DateFormat('dd MMMM');
+import 'package:money_app/app/routes/app_pages.dart';
+import 'package:money_app/app/util/date_time.dart';
+import '../controllers/transaction_controller.dart';
 
 class TransactionsView extends GetView<TransactionController> {
   const TransactionsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
     return Scaffold(
       backgroundColor: AppColors.lightGrey,
       body: Stack(
@@ -54,7 +54,7 @@ class TransactionsView extends GetView<TransactionController> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 6),
                               child: Text(
-                                dateFormat2.format(
+                                getFormatedDate(
                                     controller.transactions.last.createdAt!),
                                 style: AppText.semibold10Grey,
                               ),
@@ -87,7 +87,7 @@ class TransactionsView extends GetView<TransactionController> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 6),
                               child: Text(
-                                dateFormat2.format(transaction.createdAt!),
+                                getFormatedDate(transaction.createdAt!),
                                 style: AppText.semibold10Grey,
                               ),
                             ),
@@ -142,7 +142,10 @@ class TransactionsView extends GetView<TransactionController> {
                   ),
                   onPressed: () {
                     controller.isTopup.value = false;
-                    Get.to(() => EnterAmountView());
+                    Get.to(
+                      () => EnterAmountView(),
+                      transition: Transition.downToUp,
+                    );
                   },
                 ),
                 CustomIconButton(
@@ -154,7 +157,10 @@ class TransactionsView extends GetView<TransactionController> {
                   ),
                   onPressed: () {
                     controller.isTopup.value = true;
-                    Get.to(() => EnterAmountView());
+                    Get.to(
+                      () => EnterAmountView(),
+                      transition: Transition.downToUp,
+                    );
                   },
                 ),
                 CustomIconButton(
@@ -164,7 +170,9 @@ class TransactionsView extends GetView<TransactionController> {
                     width: 50,
                     height: 50,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.LOAN);
+                  },
                 ),
               ],
             ),

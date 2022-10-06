@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:money_app/app/config/colors.dart';
+import 'package:money_app/app/modules/transaction/controllers/transaction_controller.dart';
 
 import '../transaction_view.dart';
 
@@ -15,7 +16,11 @@ class CustomCloseButton extends StatelessWidget {
       height: 45,
       width: 50,
       child: TextButton(
-        onPressed: () => Get.back(result: const TransactionsView()),
+        onPressed: () {
+          Get.find<TransactionController>().paymentAmount.value = 0;
+          Get.find<TransactionController>().paymentAmountString = '';
+          Get.back(result: const TransactionsView());
+        },
         style: ButtonStyle(
           overlayColor: const MaterialStatePropertyAll(
             Color(0x70F7F7F7),

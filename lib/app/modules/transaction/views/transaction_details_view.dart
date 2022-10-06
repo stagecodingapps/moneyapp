@@ -99,10 +99,10 @@ class TransactionDetailsView extends StatelessWidget {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 20),
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
             child: Text(
-              'eBay',
+              controller.selectedTransaction.value.name ?? '',
               style: AppText.semibold23Black,
             ),
           ),
@@ -118,7 +118,7 @@ class TransactionDetailsView extends StatelessWidget {
             onPressed: () {},
             transaction: Transaction(name: 'Add receipt'),
             icon: Image.asset(
-              'assets/images/bag.png',
+              'assets/images/receipt.png',
               width: 12,
             ),
           ),
@@ -138,8 +138,8 @@ class TransactionDetailsView extends StatelessWidget {
                   onPressed: () => controller.splitTheBill(),
                   transaction: Transaction(name: 'Split this bill'),
                   icon: Image.asset(
-                    'assets/images/bag.png',
-                    width: 12,
+                    'assets/images/split.png',
+                    width: 14,
                   ),
                 ),
                 const Padding(
@@ -208,7 +208,7 @@ class TransactionDetailsView extends StatelessWidget {
                   children: const [
                     Text(
                       'Something wrong? Get help',
-                      style: AppText.semibold14Black,
+                      style: AppText.semibold14Red,
                     ),
                   ],
                 ),
